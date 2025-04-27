@@ -24,7 +24,7 @@
       });
 
       const data = await res.json();
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "哩呀～菜包今天有點塞住，再問一次啦～！";
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "哩呀～菜包吃太多了~暈，再問一次啦～！";
       chatBox.innerHTML += `<div class='mb-4 text-pink-800'><strong>菜包：</strong> ${reply}</div>`;
       document.getElementById("userInput").value = "";
     }
@@ -36,15 +36,15 @@
 
     <!-- "C:\Users\user\Downloads\caibao.png" -->
     <div class="flex justify-center mb-4">
-      <img src=""C:\Users\user\Downloads\caibao.png"" alt="菜包照片" class="w-32 h-32 rounded-full object-cover">
+      <img src="https://github.com/miaoli10005/caibao-market/blob/main/caibao.png" alt="caibao.png" class="w-32 h-32 rounded-full object-cover">
     </div>
 
-    <h1 class="text-3xl font-bold text-center text-pink-600 mb-4">🥟 菜包聊天室</h1>
+    <h1 class="text-3xl font-bold text-center text-pink-600 mb-4">🥟 菜包的南苗美食</h1>
     <p class="text-center text-gray-600 mb-4">苗栗南苗市場的美食達人菜包，等你來發問～</p>
     
     <div id="chatBox" class="h-64 overflow-y-auto border border-yellow-300 bg-yellow-100 p-4 rounded mb-4"></div>
-    <input id="userInput" type="text" placeholder="問菜包：南苗市場哪家蘿蔔最好吃？" class="w-full p-3 border rounded mb-2"/>
-    <button onclick="askCaibao()" class="w-full bg-pink-500 text-white p-3 rounded hover:bg-pink-600">發問 🍠</button>
+    <input id="userInput" type="text" placeholder="問菜包：南苗市場裡什麼最好吃？" class="w-full p-3 border rounded mb-2"/>
+    <button onclick="askCaibao()" class="w-full bg-pink-500 text-white p-3 rounded hover:bg-pink-600">發問</button>
   </div>
 </body>
 </html>
