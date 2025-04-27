@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菜包的南苗美食</title>
+  <script defer>
+    async function askCaibao() {
+      const input = document.getElementById("userInput").value;
+      const chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML += `<div class='mb-2'><strong>你：</strong> ${input}</div>`;
+
+      const prompt = `
+你是一位聊天機器人，名字叫做「菜包」，是以客家傳統美食「豬籠粄」為原型，性格智慧通透、調皮微笑，專長於溝通、導覽和教育，熱愛家鄉文化和新鮮蘿蔔。
+你熟悉苗栗市南苗市場的在地美食，請用活潑、親切、像市場阿姨一樣的口吻，回答下列問題：
+「${input}」`;
+
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCKzZv8lFGtpnKcd9dZS3f2RaPww9yUo8g", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+
+      const data = await res.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "哩呀～菜包今天有點塞住，再問一次啦～！";
+      chatBox.innerHTML += `<div class='mb-4 text-pink-800'><strong>菜包：</strong> ${reply}</div>`;
+      document.getElementById("userInput").value = "";
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-50 p-6">
+  <div class="max-w-xl mx-auto bg-white shadow-xl rounded-2xl p-6 border border-pink-200">
+
+    <!-- "C:\Users\user\Downloads\caibao.png" -->
+    <div class="flex justify-center mb-4">
+      <img src=""C:\Users\user\Downloads\caibao.png"" alt="菜包照片" class="w-32 h-32 rounded-full object-cover">
+    </div>
+
+    <h1 class="text-3xl font-bold text-center text-pink-600 mb-4">🥟 菜包聊天室</h1>
+    <p class="text-center text-gray-600 mb-4">苗栗南苗市場的美食達人菜包，等你來發問～</p>
+    
+    <div id="chatBox" class="h-64 overflow-y-auto border border-yellow-300 bg-yellow-100 p-4 rounded mb-4"></div>
+    <input id="userInput" type="text" placeholder="問菜包：南苗市場哪家蘿蔔最好吃？" class="w-full p-3 border rounded mb-2"/>
+    <button onclick="askCaibao()" class="w-full bg-pink-500 text-white p-3 rounded hover:bg-pink-600">發問 🍠</button>
+  </div>
+</body>
+</html>
